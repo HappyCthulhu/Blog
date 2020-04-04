@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% load static %}
+{% block image %}{% static 'img/home-bg.jpg' %}{% endblock %}
+
+{% block pagetitle %}
+  <h1>Our blog</h1>
+  <span class="subheading">Have questions? I have answers.</span>
+{% endblock %}
+
+{% block content %}
   <!-- Main Content -->
   <div class="container">
     <div class="row">
