@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from pytils.translit import slugify
+from django.shortcuts import reverse
 
 
 class Article(models.Model):
@@ -10,6 +11,10 @@ class Article(models.Model):
     image = models.ImageField(blank=True, default='media/Map-Navigation.jpg', upload_to='media', verbose_name="картинка")
     #author =
     slug = models.SlugField(unique=True, verbose_name="url")
+
+
+    def get_absolute_url(self):
+        return reverse('post', kwargs={'slug':self.slug})
 
 
     def _get_unique_slug(self):

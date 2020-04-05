@@ -9,7 +9,7 @@ class ArticleForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class':'form-control', 'placeholder':"Введите заголовок поста"}),
             'body': forms.Textarea(attrs={'class':'form-control mt-3', 'type':'text', 'rows': 7, 'cols':30, 'style':'resize:none;', 'placeholder':"Введите тело поста",}),
             'images': forms.FileInput(attrs={'type':'file', 'class':'form-control-file mt-3 mb-3', 'id':'exampleFormControlFile1'}),
-                }
+            }
 
 
 class ContactForm(forms.Form):

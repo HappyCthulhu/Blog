@@ -16,7 +16,7 @@
 
       {% for article in articles %}
         <div class="post-preview">
-          <a href="#">
+          <a href="{{ article.get_absolute_url }}">
             <h2 class="post-title">
               {{ article.title }}
             </h2>
