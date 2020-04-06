@@ -55,3 +55,6 @@ def post(request, slug=None, **kwargs):
             'article':article,
         }
         return render(request, 'post.html', context)
+def lenta(request):
+    article = Article.objects.all()
+    return render(request, 'lenta.html', context={'lenta':article})

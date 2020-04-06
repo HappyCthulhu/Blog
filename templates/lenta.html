@@ -4,8 +4,8 @@
 {% block image %}{% static 'img/home-bg.jpg' %}{% endblock %}
 
 {% block pagetitle %}
-  <h1>Наш блог</h1>
-  <span class="subheading">Есть вопросы? Оставь их при себе.</span>
+  <h1>Лента</h1>
+
 {% endblock %}
 
 {% block content %}
@@ -14,25 +14,20 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 
-      {% for article in articles %}
+      {% for article in lenta %}
         <div class="post-preview">
           <a href="{{ article.get_absolute_url }}">
             <h2 class="post-title">
               {{ article.title }}
             </h2>
           </a>
-          <p>{{ article.body|truncatechars:100 }}</p>
+          <p>{{ article.body }}</p>
           <p class="post-meta">Posted by
             <a href="#">Start Bootstrap</a>
             {{ article.date }}</p>
         </div>
         <hr>
       {% endfor %}
-
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{% url 'lenta'  %}">Старые посты &rarr;</a>
-        </div>
       </div>
     </div>
   </div>
