@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block image %}{% static 'img/about-bg.jpg' %}{% endblock %}
+
+{% block pagetitle %}
+  <h1>Создание статьи</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="POST" class="col-4 mx-auto" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Заголоввок: {{ form.title }}</p>
+    <p>Текст: {{ form.body }}</p>
+    <p>Картинка: {{ form.image }}</p>
+    <button class="btn-success" type="submit" name="button">Создать</button>
+  </form>
+{% endblock %}

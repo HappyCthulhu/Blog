@@ -37,3 +37,9 @@ class Article(models.Model):
         verbose_name = "Статья"
         verbose_name_plural = "Статьи"
         ordering = ['-date']
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100, verbose_name="имя")
+    message = models.TextField(max_length=500, verbose_name="пиьсмо")
+    phone = models.CharField(max_length=15, verbose_name="телефон")
+    email = models.EmailField(verbose_name="емайл")

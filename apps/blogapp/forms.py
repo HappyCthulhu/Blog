@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from .models import Article,  Contact
 
 class ArticleForm(forms.ModelForm):
     class Meta:
@@ -12,8 +12,13 @@ class ArticleForm(forms.ModelForm):
             }
 
 
-class ContactForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs={'class':"form-control", 'placeholder':"Name", 'id':"name", 'data-validation-required-message':"Please enter your name."}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':"form-control", 'placeholder':"Email Address", 'id':"email", 'data-validation-required-message':"Please enter your email address."}))
-    phone = forms.CharField(widget=forms.TextInput(attrs={'type':"tel", 'class':"form-control", 'placeholder':"Phone Number", 'id':"phone", 'data-validation-required-message':"Please enter your phone number."}))
-    message = forms.CharField(widget=forms.Textarea(attrs={'rows':"5", 'class':"form-control", 'placeholder':"Message", 'id':"message", 'data-validation-required-message':"Please enter a message."}))
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'phone', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class':"form-control", 'placeholder':"Name", 'id':"name", 'data-validation-required-message':"Please enter your name."}),
+            'email': forms.EmailInput(attrs={'class':"form-control", 'placeholder':"Email Address", 'id':"email", 'data-validation-required-message':"Please enter your email address."}),
+            'phone': forms.TextInput(attrs={'type':"tel", 'class':"form-control", 'placeholder':"Phone Number", 'id':"phone", 'data-validation-required-message':"Please enter your phone number."}),
+            'message': forms.Textarea(attrs={'rows':"5", 'class':"form-control", 'placeholder':"Message", 'id':"message", 'data-validation-required-message':"Please enter a message."})
+        }

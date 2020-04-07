@@ -9,6 +9,11 @@
 {% endblock %}
 
 {% block content %}
+
+<style media="screen">
+
+</style>
+
   <!-- Main Content -->
   <div class="container">
     <div class="row">
@@ -21,7 +26,7 @@
               {{ article.title }}
             </h2>
           </a>
-          <p>{{ article.body }}</p>
+          <p style="white-space:pre-line; text-indent: 1.5em;">{{ article.body|safe }}</p>
           <p class="post-meta">Posted by
             <a href="#">Start Bootstrap</a>
             {{ article.date }}</p>

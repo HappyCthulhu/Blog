@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
 from .forms import ArticleForm, ContactForm
-from django.core.mail import send_mail
 from django.views.generic import DetailView
+from django.views.generic.edit import CreateView
+import re
+from .service import send
+from .tasks import send_spam_email
 
 def index(request):
     articles = Article.objects.all()[:5]
@@ -37,13 +40,8 @@ def contact(request):
             email = bound_form.cleaned_data['email']
             message = bound_form.cleaned_data['message']
             phone = bound_form.cleaned_data['phone']
-            print(name)
-            send_mail(
-                f'От {name}',
-                f'Письмо: {message} . Телефон: {phone}',
-                'valeriyg98@gmail.com',
-                [f'{email}'],
-            )
+            #send(name, message, phone, email)
+            send_spam_email.delay(name, message, phone, email)
             return redirect('index')
         return render(request, 'contact.html', context={'form': form})
 
@@ -55,6 +53,19 @@ def post(request, slug=None, **kwargs):
             'article':article,
         }
         return render(request, 'post.html', context)
+
 def lenta(request):
     article = Article.objects.all()
     return render(request, 'lenta.html', context={'lenta':article})
+
+class ArticleCreate(CreateView):
+    model = Article
+    fields = ['title', 'body', 'image']
+    template_name = 'article_create.html'
+
+    def form_valid(self, form):
+        stringer = form.instance.body
+        stringer.replace("""    """, '<br>')
+        stringer = re.sub(r'   ', '<br>', stringer)
+        form.save(stringer)
+        return super().form_valid(form)

@@ -6,5 +6,6 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('article/<str:slug>/', views.post, name="post"),
     path('lenta/', views.lenta, name="lenta"),
+    path('article_create/', views.ArticleCreate.as_view(), name="create"),
     path('', views.index, name="index")
 ]
